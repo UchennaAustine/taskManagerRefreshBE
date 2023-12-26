@@ -51,3 +51,23 @@ export const viewSingleTask = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const doneWithTask = async (req: Request, res: Response) => {
+  try {
+    const { taskId } = req.params;
+    const executed = await iTaskModel.findByIdAndUpdate(
+      taskId,
+      { success: true },
+      { new: true }
+    );
+    return res.status(statusCode.UPDATED).json({
+      message: `Task has being executed`,
+      data: executed,
+    });
+  } catch (error: any) {
+    return res.status(statusCode.BAD_REQUEST).json({
+      message: `Finishing Task Error ${error.message}`,
+      info: error,
+    });
+  }
+};
