@@ -1,5 +1,6 @@
 export enum statusCode {
   OK = 200,
+  DELETED = 200,
   CREATED = 201,
   UPDATED = 201,
   NOT_FOUND = 404,
